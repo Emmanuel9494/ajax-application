@@ -55,6 +55,7 @@
         });
       });
   }
+  loadInfoBoxes();
 
   // Load Materials
   function loadMaterialInfo() {
@@ -86,7 +87,7 @@
   }
 
   loadMaterialInfo();
-  loadInfoBoxes();
+  
 
   function showInfo() {
     let selected = document.querySelector(`#${this.slot}`);
