@@ -55,9 +55,38 @@
         });
       });
   }
-  loadInfoBoxes();
 
-  
+  // Load Materials
+  function loadMaterialInfo() {
+    fetch("https://swiftpixel.com/earbud/api/materials")
+      .then((response) => response.json())
+      .then((materials) => {
+        materials.forEach((material) => {
+          // Clone the template
+          const clone = materialTemplate.content.cloneNode(true);
+
+          // Populate with data
+          const materialHeading = clone.querySelector(".material-heading");
+          materialHeading.textContent = material.heading;
+
+          const materialDescription = clone.querySelector(".material-description");
+          materialDescription.textContent = material.description;
+
+          materialList.appendChild(clone);
+        });
+
+        loader.classList.toggle("hidden");
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMessage = document.createElement("p");
+        errorMessage.textContent = "Unable to load materials. Please check your internet connection and try again.";
+        noMaterials.appendChild(errorMessage);
+      });
+  }
+
+  loadMaterialInfo();
+  loadInfoBoxes();
 
   function showInfo() {
     let selected = document.querySelector(`#${this.slot}`);
